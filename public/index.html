@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en-gb">
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+
+		<title>Application</title>
+
+		<link rel="stylesheet" href="/dist/components.css">
+		<link rel="stylesheet" href="/dist/app.css">
+	</head>
+	<body>
+		<div id="app">
+			<main>
+				<welcome></welcome>
+				<squarepay :client="client" :currency="currency" :amount="amount"></squarepay>
+			</main>
+		</div>
+
+		<script src="/dist/app.js"></script>
+	</body>
+</html>
