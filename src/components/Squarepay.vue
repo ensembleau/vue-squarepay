@@ -1,14 +1,8 @@
 
 <script>
 export default {
-    data() {
-        return {
-            name: "TRANSACTION"
-        }
-    },
     computed : {
         href() {
-            // return `intent:#Intent;action=com.squareup.register.action.CHARGE;package=com.squareup;S.browser_fallback_url=https://square.stage.ensemble.agency;S.com.squareup.register.WEB_CALLBACK_URI=https://square.stage.ensemble.agency;S.com.squareup.register.CLIENT_ID=${ this.client };S.com.squareup.register.API_VERSION=v1.3;i.com.squareup.register.TOTAL_AMOUNT=${ this.amount };S.com.squareup.register.CURRENCY_CODE=${ this.currency };S.com.squareup.register.TENDER_TYPES=com.squareup.register.TENDER_CARD,com.squareup.register.TENDER_CARD_ON_FILE,com.squareup.register.TENDER_CASH,com.squareup.register.TENDER_OTHER;end`
             const data = {
                 'action': 'com.squareup.register.action.CHARGE',
                 'package': 'com.squareup',
@@ -36,43 +30,35 @@ export default {
 
               href += ';'
             }
-            console.log("intent:#Intent;" + href + "end");
+            // test for correct concatenation 
+            // console.log("intent:#Intent;" + href + "end");
             return "intent:#Intent;" + href + "end";
         }
     },
     props: {
         client: {
             type: [String, Number],
-            default: 1234567890
-        }, // CLIENT_ID.
+            default: 1234567890 // CLIENT_ID.
+        },
         currency: {
             type: String,
-            default: 'AUD'
-        }, // Currency to use in transaction.
+            default: 'AUD' // Currency to use in transaction.
+        },
         amount: {
             type: Number,
-            default:  0
-        }, // Amount in cents eg. 100 = $1.
+            default:  0 // Amount in cents eg. 100 = $1.
+        },
         callbackUrl: {
             type: String,
-            default: 'https://square.stage.ensemble.agency'
-        }, // Fallback URL
+            default: 'https://square.stage.ensemble.agency' // Fallback URL
+        },
     },
-    methods : {
-    }
 }
 </script>
 
 <template>
     <div class="button-wrapper">
         <a class="square-pay-button" :href="href"><slot></slot></a>
-
-        <!-- html for result wip -->
-        <!-- <transition name="fade">
-            <div v-if="amount > 0" class="results">
-                 Paid {{ amount }} {{ currency }} to {{ client }}
-            </div>
-        </transition> -->
     </div>
 </template>
 
