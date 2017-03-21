@@ -12,8 +12,7 @@
 	<body>
 		<div id="app">
 			<main>
-				<welcome></welcome>
-				<squarepay :client="client" :currency="currency" :amount="amount"></squarepay>
+				<squarepay :callbackUrl="callbackUrl" :client="client" :currency="currency" :amount="amount"> {{ name }}</squarepay>
 			</main>
 		</div>
 
