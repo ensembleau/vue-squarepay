@@ -18,7 +18,7 @@ export default {
     },
     methods : {
         txnSent() {
-            alert('the transaction was sent', this.href);
+            alert('the transaction was sent');
         }
     }
 }
