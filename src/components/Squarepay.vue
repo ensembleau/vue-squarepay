@@ -6,17 +6,19 @@ export default {
             name: "PAY ME"
         }
     },
+    computed : {
+        href() {
+            return `intent:#Intent;action=com.squareup.register.action.CHARGE;package=com.squareup;S.browser_fallback_url=https://square.stage.ensemble.agency;S.com.squareup.register.WEB_CALLBACK_URI=https://square.stage.ensemble.agency;S.com.squareup.register.CLIENT_ID=${ this.client };S.com.squareup.register.API_VERSION=v1.3;i.com.squareup.register.TOTAL_AMOUNT=${ this.amount };S.com.squareup.register.CURRENCY_CODE=${ this.currency };S.com.squareup.register.TENDER_TYPES=com.squareup.register.TENDER_CARD,com.squareup.register.TENDER_CARD_ON_FILE,com.squareup.register.TENDER_CASH,com.squareup.register.TENDER_OTHER;end`
+        }
+    },
     props: {
         client: 1234567890,
         currency: "AUD",
         amount: 0 // amount for transaction
     },
-    methods: {
-        startTxn(client, currency, amount) {
-            this.client = client;
-            this.currency = currency || "USD";
-            this.amount = amount;
-            alert("order placed successfully!");
+    methods : {
+        txnSent() {
+            alert('the transaction was sent', this.href);
         }
     }
 }
@@ -24,26 +26,28 @@ export default {
 
 <template>
     <div class="button-wrapper">
-        <a :client="client" :currency="currency" :amount="amount" href="#"><button @click.once="startTxn(1234561111, currenci, 50)" type="button" name="button">{{ name }}</button></a>
-        <transition name="fade">
+        <a :client="client" :currency="currency" :amount="amount" :href="href"><button @click="txnSent()" type="button" name="button">{{ name }}</button></a>
+
+        <!-- html for results -->
+        <!-- <transition name="fade">
             <div v-if="amount > 0" class="results">
                  Paid {{ amount }} {{ currency }} to {{ client }}
             </div>
-        </transition>
+        </transition> -->
     </div>
 </template>
 
 <style lang="sass" scoped>
     .button-wrapper {
         position: relative;
-        padding: 10px;
-        border: 3px solid black;
-        height: 200px;
+        border: 2px solid black;
+        min-height: 150px;
         width: 100%;
         button {
-            margin: 10px;
-            padding: 5px 20px;
-            border: 1px solid red;
+            padding: 8px 25px;
+            color: #333;
+            border: 2px solid #333;
+            border-radius: 3px;
             position: absolute;
             top: 50%;
             left: 50%;
