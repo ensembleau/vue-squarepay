@@ -1,44 +1,162 @@
-# aurora.
+# vue-squarepay
 
-![Splash](/meta/splash.png)
+A Vue component that wraps the Web API functionality of Square to accept payments.
 
-A Vue oriented development framework with WebPack, SASS and Babel.
+## Install:
 
-This framework is intended for use in developing rich Vue applications with WebPack, which allows
-single-file component composition supporting ES6 JavaScript via Babel and SASS compilation. The
-framework itself is lightweight, acting as the centre point of a collection of more specialised
-packages.
+```
+$ npm install --save vue-squarepay
+```
+## Usage:
 
-## structure.
+This component takes the query parameters to initiate a payment with the [Squarepay WebAPI](https://docs.connect.squareup.com/). The main settings are easily configurable with props : <code>client</code>, <code>currency</code>, <code>amount</code>, <code>callbackUrl</code> - see table below for full usage breakdown.
 
-* `public` - Contains your public resources (images, compiled CSS and JavaScript, etc).
-    * `public/dist` - Where your packaged CSS and JavaScript will end up.
-* `src` - Contains your application source files (Vue components, ES6 JavaScript, SASS).
-    * `src/components` - Contains single file Vue components.
-    * `src/js` - Contains your JavaScript.
-    * `src/scss` - Contains your SASS (SCSS) files.
-        * `src/scss/partials` - Contains your SASS partials. Most of your SASS should be declared here and `@imported` from SASS files in the parent directory.
+## Params/Props:
 
-## packages.
+<table>
+	<thead>
+		<tr>
+			<th>Name</th>
+			<th>Description</th>
+			<th>Prop</th>
+            <th>Type</th>
+            <th>Required</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<td><code>action</code></td>
+			<td>This must be <code>com.squareup.register.action.CHARGE</code>. This represents a Square transaction request.</td>
+			<td>No</td>
+            <td>N/A</td>
+            <td>Yes</td>
+		</tr>
+		<tr>
+            <td><code>S.com.squareup.register.WEB_CALLBACK_URI</code></td>
+            <td>The callback URI that Square Register will use to send a response.</td>
+            <td>Yes - <code>callbackUrl</code></td>
+            <td>String</td>
+            <td>Yes</td>
+		</tr>
+        <tr>
+            <td><code>S.com.squareup.register.CLIENT_ID</code></td>
+            <td>Your client ID</td>
+            <td>Yes - <code>client</code></td>
+            <td><code>String, Number</code></td>
+            <td>Yes</td>
+        </tr>
+        <tr>
+            <td><code>S.com.squareup.register.API_VERSION</code></td>
+            <td>The targeted version of the Square Register API, e.g., v1.3</td>
+            <td>No</td>
+            <td>N/A</td>
+            <td>Yes</td>
+        </tr>
+        <tr>
+            <td><code>S.com.squareup.register.CURRENCY_CODE</code></td>
+            <td>The currency code, e.g., USD</td>
+            <td>Yes - <code>currency</code></td>
+            <td><code>String</code></td>
+            <td>Yes</td>
+        </tr>
+        <tr>
+            <td><code>i.com.squareup.register.TOTAL_AMOUNT</code></td>
+            <td>The total amount represented in the smallest unit of the supplied currency, e.g., a value of 100 corresponds to $1.00 USD</td>
+            <td>Yes - <code>amount</code></td>
+            <td><code>Number</code></td>
+            <td>Yes</td>
+        </tr>
+        <tr>
+            <td><code>S.com.squareup.register.TENDER_TYPES</code></td>
+            <td>Provides the tender types that will be allowed and displayed by Square Register. Must be a non-empty comma-delimited set of the following 4 rows</td>
+            <td>No</td>
+            <td>N/A</td>
+            <td>Yes</td>
+        </tr>
+        <tr>
+            <td><code>com.squareup.register.TENDER_CARD</code></td>
+            <td>See Above</td>
+            <td>No</td>
+            <td>N/A</td>
+            <td>Yes</td>
+        </tr>
+        <tr>
+            <td><code>com.squareup.register.TENDER_CARD_ON_FILE</code></td>
+            <td>See Above</td>
+            <td>No</td>
+            <td>N/A</td>
+            <td>Yes</td>
+        </tr>
+        <tr>
+            <td><code>com.squareup.register.TENDER_CASH</code></td>
+            <td>See Above</td>
+            <td>No</td>
+            <td>N/A</td>
+            <td>Yes</td>
+        </tr>
+        <tr>
+            <td><code>com.squareup.register.TENDER_OTHER</code></td>
+            <td>See Above</td>
+            <td>No</td>
+            <td>N/A</td>
+            <td>Yes</td>
+        </tr>
+        <tr>
+            <td><code>package</code></td>
+            <td>If set, this must be 'com.squareup'. Identifies the package name of the application responding to this intent.</td>
+            <td>No</td>
+            <td>N/A</td>
+            <td>Recommended</td>
+        </tr>
+        <tr>
+            <td><code>S.com.squareup.register.CURRENCY_CODE</code></td>
+            <td>If Register is not installed, Android will route to this supplied url; If missing, Android will route to Play Store if package parameter is provided.</td>
+            <td>Yes - <code>callbackUrl</code></td>
+            <td><code>String</code></td>
+            <td>No</td>
+        </tr>
+        <tr>
+            <td><code>S.com.squareup.register.NOTE</code></td>
+            <td>A note to add to your transaction if completed successfully.</td>
+            <td>No</td>
+            <td>N/A</td>
+            <td>No</td>
+        </tr>
+        <tr>
+            <td><code>S.com.squareup.register.REQUEST_METADATA</code></td>
+            <td>The state parameter that is returned in the response for the developer's use.</td>
+            <td>No</td>
+            <td>N/A</td>
+            <td>No</td>
+        </tr>
+	</tbody>
+</table>
 
-Because the framework acts almost purely as a compiler rather than a collection of boilerplate CSS
-and JavaScript; said CSS, JavaScript and even Vue components are dependencies of this package via
-NPM. Those being:
 
-* [aurora-css](https://github.com/MartyWallace/aurora-css) - The default SASS library included with Aurora.
-    * [documentation](https://martywallace.github.io/aurora-css/).
-* [aurora-ui](https://github.com/MartyWallace/aurora-ui) - Default UI related Vue components included with Aurora.
+## Example:
 
-This approach allows components to be easily swapped out for preferred ones.
+Here is an example application containing the `squarepay` component:
 
-## setup.
+JavaScript:
 
-All setup is provided by running:
+```
+import Vue from 'vue';
+import Squarepay from 'vue-squarepay';
 
-    $ npm run setup
+new Vue({
+	el: '#app',
+	store,
+	components: { Squarepay },
+});
 
-## development.
+```
 
-To compile your application (SASS -> CSS, WebPack, etc), run:
+Markup:
 
-    $ npm run build
+```
+<squarepay :callbackUrl="callbackUrl" :client="client" :currency="currency" :amount="amount"></squarepay>
+
+```
+
+
+###### more updates planned to come shortly..
