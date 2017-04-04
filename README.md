@@ -25,13 +25,6 @@ This component takes the query parameters to initiate a payment with the [Square
 	</thead>
 	<tbody>
 		<tr>
-			<td><code>action</code></td>
-			<td>This must be <code>com.squareup.register.action.CHARGE</code>. This represents a Square transaction request.</td>
-			<td>No</td>
-            <td>N/A</td>
-            <td>Yes</td>
-		</tr>
-		<tr>
             <td><code>S.com.squareup.register.WEB_CALLBACK_URI</code></td>
             <td>The callback URI that Square Register will use to send a response.</td>
             <td>Yes - <code>callbackUrl</code></td>
@@ -43,13 +36,6 @@ This component takes the query parameters to initiate a payment with the [Square
             <td>Your client ID</td>
             <td>Yes - <code>client</code></td>
             <td><code>String, Number</code></td>
-            <td>Yes</td>
-        </tr>
-        <tr>
-            <td><code>S.com.squareup.register.API_VERSION</code></td>
-            <td>The targeted version of the Square Register API, e.g., v1.3</td>
-            <td>No</td>
-            <td>N/A</td>
             <td>Yes</td>
         </tr>
         <tr>
@@ -66,71 +52,45 @@ This component takes the query parameters to initiate a payment with the [Square
             <td><code>Number</code></td>
             <td>Yes</td>
         </tr>
-        <tr>
-            <td><code>S.com.squareup.register.TENDER_TYPES</code></td>
-            <td>Provides the tender types that will be allowed and displayed by Square Register. Must be a non-empty comma-delimited set of the following 4 rows</td>
-            <td>No</td>
-            <td>N/A</td>
-            <td>Yes</td>
-        </tr>
-        <tr>
-            <td><code>com.squareup.register.TENDER_CARD</code></td>
-            <td>See Above</td>
-            <td>No</td>
-            <td>N/A</td>
-            <td>Yes</td>
-        </tr>
-        <tr>
-            <td><code>com.squareup.register.TENDER_CARD_ON_FILE</code></td>
-            <td>See Above</td>
-            <td>No</td>
-            <td>N/A</td>
-            <td>Yes</td>
-        </tr>
-        <tr>
-            <td><code>com.squareup.register.TENDER_CASH</code></td>
-            <td>See Above</td>
-            <td>No</td>
-            <td>N/A</td>
-            <td>Yes</td>
-        </tr>
-        <tr>
-            <td><code>com.squareup.register.TENDER_OTHER</code></td>
-            <td>See Above</td>
-            <td>No</td>
-            <td>N/A</td>
-            <td>Yes</td>
-        </tr>
-        <tr>
-            <td><code>package</code></td>
-            <td>If set, this must be 'com.squareup'. Identifies the package name of the application responding to this intent.</td>
-            <td>No</td>
-            <td>N/A</td>
-            <td>Recommended</td>
-        </tr>
-        <tr>
-            <td><code>S.com.squareup.register.CURRENCY_CODE</code></td>
-            <td>If Register is not installed, Android will route to this supplied url; If missing, Android will route to Play Store if package parameter is provided.</td>
-            <td>Yes - <code>callbackUrl</code></td>
-            <td><code>String</code></td>
-            <td>No</td>
-        </tr>
-        <tr>
-            <td><code>S.com.squareup.register.NOTE</code></td>
-            <td>A note to add to your transaction if completed successfully.</td>
-            <td>No</td>
-            <td>N/A</td>
-            <td>No</td>
-        </tr>
-        <tr>
-            <td><code>S.com.squareup.register.REQUEST_METADATA</code></td>
-            <td>The state parameter that is returned in the response for the developer's use.</td>
-            <td>No</td>
-            <td>N/A</td>
-            <td>No</td>
-        </tr>
+        		<tr>
+			<td><code>S.com.squareup.register.TENDER_TYPES</code></td>
+			<td>Provides the tender types that will be allowed and displayed by Square Register. Must be a non-empty comma-delimited set of the following:</td>
+			<td>N/A - see below</td>
+			<td>N/A</td>
+			<td>Yes</td>
+		</tr>
+		<tr>
+			<td><code>com.squareup.register.TENDER_CARD</code></td>
+			<td>see above</td>
+			<td><code>card</code></td>
+			<td>String</td>
+			<td>Yes</td>
+		</tr>
+		<tr>
+			<td><code>com.squareup.register.TENDER_CARD_ON_FILE</code></td>
+			<td>see above</td>
+			<td><code>cardOnFile</code></td>
+			<td>String</td>
+			<td>Yes</td>
+		</tr>
+		<tr>
+			<td><code>com.squareup.register.TENDER_CASH</code></td>
+			<td>see above</td>
+			<td><code>cash</code></td>
+			<td>String</td>
+			<td>Yes</td>
+		</tr>
+		<tr>
+			<td><code>com.squareup.register.TENDER_OTHER</code></td>
+			<td>see above</td>
+			<td><code>other</code></td>
+			<td>String</td>
+			<td>Yes</td>
+		</tr>
 	</tbody>
+
 </table>
+<br>
 
 
 ## Example:
@@ -154,9 +114,6 @@ new Vue({
 Markup:
 
 ```
-<squarepay :callbackUrl="callbackUrl" :client="client" :currency="currency" :amount="amount"></squarepay>
+<squarepay :callbackUrl="callbackUrl" :client="client" :currency="currency" :amount="amount" :tenderTypes="[card, cardOnFile, cash, other]"></squarepay>
 
 ```
-
-
-###### more updates planned to come shortly..
