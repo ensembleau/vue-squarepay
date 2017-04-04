@@ -18,8 +18,7 @@ export default {
                     `com.squareup.register. + this.tenderTypes.other`
                 ]
             };
-
-            let href = '';
+				let href = '';
 
             for (let prop in data) {
                 href += prop + '=';
