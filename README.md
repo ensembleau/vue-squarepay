@@ -114,6 +114,6 @@ new Vue({
 Markup:
 
 ```
-<squarepay :callbackUrl="callbackUrl" :client="client" :currency="currency" :amount="amount" :tenderTypes="[card, cardOnFile, cash, other]"></squarepay>
+<squarepay :callbackUrl="callbackUrl" :client="client" :currency="currency" :amount="amount" :tenderTypes="['card', 'cardOnFile', 'cash', 'other']"></squarepay>
 
 ```
